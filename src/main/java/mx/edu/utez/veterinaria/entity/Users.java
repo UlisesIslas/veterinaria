@@ -22,7 +22,7 @@ public class Users implements Serializable {
     @Column(name = "username", length = 45, unique = true, nullable = false)
     private String username;
 
-    @Column(name = "password", length = 45, nullable = false)
+    @Column(name = "password", length = 125, nullable = false)
     private String password;
 
     @Column(name = "name", length = 45, nullable = false)
@@ -34,8 +34,8 @@ public class Users implements Serializable {
     @Column(name = "surname", length = 45, nullable = true)
     private String surname;
 
-    @Column(name = "status", nullable = false)
-    private boolean status;
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled;
 
     @Column(name = "image", nullable = true, length = 45)
     private String image;
@@ -54,7 +54,7 @@ public class Users implements Serializable {
     private double salary;
 
     public Users() {
-        this.status = true;
+        this.enabled = true;
     }
 
     public Integer getId() {
@@ -105,12 +105,12 @@ public class Users implements Serializable {
         this.surname = surname;
     }
 
-    public boolean isStatus() {
-        return status;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getImage() {

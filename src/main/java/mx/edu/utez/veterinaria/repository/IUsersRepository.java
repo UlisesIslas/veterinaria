@@ -6,4 +6,6 @@ import mx.edu.utez.veterinaria.entity.Users;
 
 public interface IUsersRepository extends JpaRepository<Users, Integer> {
     
+    Users findByUsername(String username);
+
 }
