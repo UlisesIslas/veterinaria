@@ -17,6 +17,11 @@ angular
                     controller: "UserRegisterCtrl",
                     controllerAs: "ctrlUserRegister",
                 })
+                .when("/admin/user", {
+                    templateUrl: "/view/admin/users/user_list.html",
+                    "controller": "UserListCtrl",
+                    controllerAs: "ctrlUserList",
+                })
         }
     ]).constant('APP_URL', {
         url: "http://localhost:8080"

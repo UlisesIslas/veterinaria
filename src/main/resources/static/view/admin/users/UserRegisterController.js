@@ -6,7 +6,8 @@ angular.module("routingApp").controller("UserRegisterCtrl", [
     "$location",
     "$routeParams",
     "$filter",
-    function ($rootScope, $scope, $http, APP_URL, $location, $routeParams, $filter) {
+    "$window",
+    function ($rootScope, $scope, $http, APP_URL, $location, $routeParams, $filter, $window) {
         $scope.token = "Bearer " + localStorage.getItem("token");
         const notyf = new Notyf({
             duration: 2500,
@@ -57,6 +58,7 @@ angular.module("routingApp").controller("UserRegisterCtrl", [
                         },
                         data: $scope.user
                     }).then((res) => {
+                        $window.location.href = "#!/admin/user"
                         notyf.success("Usuario registrado");
                     })
                 } else {
@@ -66,5 +68,16 @@ angular.module("routingApp").controller("UserRegisterCtrl", [
                 notyf.error("Ingresa una contraseña");
             }
         }
+
+        $(document).ready(function () {
+            $('#gender').select2({
+                placeholder: "SELECCIONAR SEXO...",
+                allowClear: true
+            });
+            $('#role').select2({
+                placeholder: "SELECCIONAR ROL...",
+                allowClear: true
+            });
+        });
     }
 ])
