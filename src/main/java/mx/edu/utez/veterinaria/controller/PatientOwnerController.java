@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.edu.utez.veterinaria.entity.PatientOwner;
+import mx.edu.utez.veterinaria.entity.dto.OwnerDTO;
 import mx.edu.utez.veterinaria.service.PatientOwnerService;
 
 @RestController
@@ -32,7 +33,7 @@ public class PatientOwnerController {
     }
 
     @PostMapping("/save")
-    public boolean save(@RequestBody PatientOwner obj) {
+    public boolean save(@RequestBody OwnerDTO obj) {
         return patientOwnerService.save(obj);
     }
 

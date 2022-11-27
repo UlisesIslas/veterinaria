@@ -72,12 +72,12 @@ angular.module("routingApp").controller("UserRegisterCtrl", [
         $(document).ready(function () {
             $('#gender').select2({
                 placeholder: "SELECCIONAR SEXO...",
-                allowClear: true
+                allowClear: false
             });
             $('#role').select2({
                 placeholder: "SELECCIONAR ROL...",
-                allowClear: true
+                allowClear: false
             });
         });
     }
-])
+]);

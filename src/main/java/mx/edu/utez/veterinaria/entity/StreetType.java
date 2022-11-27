@@ -20,13 +20,6 @@ public class StreetType implements Serializable {
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
-    @Column(name = "status", nullable = false)
-    private boolean status;
-
-    public StreetType() {
-        this.status = true;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -42,15 +35,5 @@ public class StreetType implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    
     
 }

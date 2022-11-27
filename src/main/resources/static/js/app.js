@@ -19,8 +19,13 @@ angular
                 })
                 .when("/admin/user", {
                     templateUrl: "/view/admin/users/user_list.html",
-                    "controller": "UserListCtrl",
+                    controller: "UserListCtrl",
                     controllerAs: "ctrlUserList",
+                })
+                .when("/receptionist/client/register", {
+                    templateUrl: "/view/receptionist/client_register.html",
+                    controller: "ClientRegisterCtrl",
+                    controllerAs: "ctrlClientRegister",
                 })
         }
     ]).constant('APP_URL', {

@@ -1,0 +1,162 @@
+<div ng-init="ctrlClientRegister.init()"></div>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            Registrar Cliente
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <h6>Datos del Cliente</h6>
+                </div>
+                <div class="col-4">
+                    <label for="name">Nombre(s)</label>
+                    <input type="text" id="name" name="name" required placeholder="Nombre(s)" class="form-control"
+                        ng-model="dto.owner.name">
+                </div>
+                <div class="col-4">
+                    <label for="lastname">Primer Apellido</label>
+                    <input type="text" id="lastname" name="lastname" required placeholder="Primer Apellido"
+                        class="form-control" ng-model="dto.owner.lastname">
+                </div>
+                <div class="col-4">
+                    <label for="surname">Segundo Apellido</label>
+                    <input type="text" id="surname" name="surname" placeholder="Segundo Apellido" class="form-control"
+                        ng-model="dto.owner.surname">
+                </div>
+                <div class="col-3 mt-2">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" name="email" id="email" required placeholder="Correo Electrónico"
+                        class="form-control" ng-model="dto.owner.email">
+                </div>
+                <div class="col-3 mt-2">
+                    <label for="phone">Número de Teléfono Fijo</label>
+                    <input type="text" name="phone" id="phone" required placeholder="Número de Teléfono Fijo"
+                        class="form-control" ng-model="dto.owner.phone" maxlength="10">
+                </div>
+                <div class="col-3 mt-2">
+                    <label for="mobile">Número de Teléfono Celular</label>
+                    <input type="text" name="mobile" id="mobile" required placeholder="Número de Teléfono Celular"
+                        class="form-control" ng-model="dto.owner.mobile" maxlength="10">
+                </div>
+                <div class="col-3 mt-2">
+                    <label for="wtspp">Número para WhatsApp</label>
+                    <input type="text" name="wtspp" id="wtspp" placeholder="Número para WhatsApp" class="form-control"
+                        ng-model="dto.owner.whatsapp" maxlength="10">
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <h6>Dirección del Cliente</h6>
+                </div>
+                <div class="col-4">
+                    <label for="streetT">Tipo de Vialidad</label>
+                    <select name="streetT" id="streetT" required class="form-select select2"
+                        ng-model="dto.ownerAddress.streetType"
+                        ng-options="street as street.name for street in streetList track by street.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="col-4">
+                    <label for="streetN">Nombre de la Vialidad</label>
+                    <input type="text" name="streetN" id="streetN" required placeholder="Nombre de la Vialidad"
+                        class="form-control" ng-model="dto.ownerAddress.streetName">
+                </div>
+                <div class="col-4">
+                    <label for="suburbT">Tipo de Asentamiento</label>
+                    <select name="suburbT" id="suburbT" required class="form-select select2"
+                        ng-model="dto.ownerAddress.suburbType"
+                        ng-options="suburb as suburb.name for suburb in suburbList track by suburb.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="col-4 mt-2">
+                    <label for="suburbN">Nombre del Asentamiento</label>
+                    <input type="text" name="suburbN" id="suburbN" required placeholder="Nombre del Asentamiento"
+                        class="form-control" ng-model="dto.ownerAddress.suburbName">
+                </div>
+                <div class="col-4 mt-2">
+                    <label for="ext">Número Exterior</label>
+                    <input type="number" name="ext" id="ext" required placeholder="Número Exterior" class="form-control"
+                        ng-model="dto.ownerAddress.outdoorNumber">
+                </div>
+                <div class="col-4 mt-2">
+                    <label for="inr">Número Interior</label>
+                    <input type="number" name="inr" id="inr" placeholder="Número Interior" class="form-control"
+                        ng-model="dto.ownerAddress.interiorNumber">
+                </div>
+                <div class="col-4 mt-2">
+                    <label for="state">Estado</label>
+                    <select name="state" id="state" required class="form-select select2" ng-model="tmp.state"
+                        ng-options="state as state.name for state in statesList track by state.id"
+                        ng-change="ctrlClientRegister.getCities()">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="col-4 mt-2">
+                    <label for="city">Municipio</label>
+                    <select name="city" id="city" required class="form-select select2" disabled
+                        ng-model="dto.ownerAddress.city"
+                        ng-options="city as city.name for city in citiesList track by city.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="col-4 mt-2">
+                    <label for="postal">Código Postal</label>
+                    <input type="text" name="postal" id="postal" required placeholder="Código Postal"
+                        class="form-control" ng-model="dto.ownerAddress.postalCode" maxlength="5">
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <h6>Datos de la Mascota</h6>
+                </div>
+                <div class="col-4">
+                    <label for="pName">Nombre</label>
+                    <input type="text" name="pName" id="pName" required placeholder="Nombre" class="form-control"
+                        ng-model="dto.pet.name">
+                </div>
+                <div class="col-4">
+                    <label for="bDate">Fecha de Nacimiento</label>
+                    <input type="date" name="bDate" id="bDate" required placeholder="Fecha de Nacimiento"
+                        class="form-control" ng-model="dto.pet.birthDate">
+                </div>
+                <div class="col-4">
+                    <label for="animalType">Tipo de Animal</label>
+                    <select name="animalType" id="animalType" required class="form-select select2"
+                        ng-model="dto.pet.animalType"
+                        ng-options="type as type.name for type in animalTypeList track by type.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="col-4 mt-2">
+                    <label for="breed">Raza</label>
+                    <input type="text" name="breed" id="breed" required placeholder="Raza" class="form-control"
+                        ng-model="dto.pet.breed">
+                </div>
+                <div class="col-4 mt-2">
+                    <label for="color">Color</label>
+                    <input type="text" name="color" id="color" required placeholder="Color" class="form-control"
+                        ng-model="dto.pet.color">
+                </div>
+                <div class="col-4 mt-2">
+                    <label for="gender">Sexo</label>
+                    <select name="gender" id="gender" required class="form-select select2" ng-model="dto.pet.gender">
+                        <option value=""></option>
+                        <option value="1">Macho</option>
+                        <option value="0">Hembra</option>
+                    </select>
+                </div>
+                <div class="col-12 mt-2">
+                    <hr>
+                    <div class="row">
+                        <div class="col-6">
+                            <button class="btn btn-secondary">Cancelar</button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-primary" ng-click="ctrlClientRegister.save()">Registrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
