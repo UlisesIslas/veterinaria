@@ -19,7 +19,7 @@ public class City implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name", nullable = false, length = 45)
+    @Column(name = "name", nullable = false, length = 200)
     private String name;
 
     @Column(name = "status", nullable = false)

@@ -60,7 +60,7 @@ angular.module("routingApp").controller("LoginCtrl", [
                 },
                 data: $scope.user,
             }).then((res) => {
-                this.beforeLogin();
+                this.login();
             }).catch((err) => {
                 console.log(err);
             });

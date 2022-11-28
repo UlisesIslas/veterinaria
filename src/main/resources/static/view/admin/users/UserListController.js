@@ -23,8 +23,8 @@ angular.module("routingApp").controller("UserListCtrl", [
                 url: `${APP_URL.url}/users`,
                 headers: {
                     "Content-Type": "application/json",
-                            Accept: "application/json",
-                            authorization: $scope.token,
+                    Accept: "application/json",
+                    authorization: $scope.token,
                 },
             }).then((res) => {
                 if (res.data.code == 200) {

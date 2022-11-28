@@ -31,6 +31,11 @@ public class CityController {
         return cityService.findById(id);
     }
 
+    @GetMapping("/state/{id}")
+    public List<City> findByState(@PathVariable("id") int id) {
+        return cityService.findByStateId(id);
+    }
+
     @PostMapping("/save")
     public boolean save(@RequestBody City obj) {
         return cityService.save(obj);
