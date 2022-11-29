@@ -25,6 +25,11 @@ public class PatientsService {
         return patientsRepository.findById(id).get();
     }
 
+    @Transactional(readOnly = true)
+    public List<Patients> findAllByOwnerId(int id) {
+        return patientsRepository.findByOwnerId(id);
+    }
+
     @Transactional
     public boolean save(Patients obj) {
         return patientsRepository.save(obj) != null;

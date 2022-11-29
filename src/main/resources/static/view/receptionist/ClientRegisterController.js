@@ -103,6 +103,7 @@ angular.module("routingApp").controller("ClientRegisterCtrl", [
                 data: $scope.dto,
             }).then((res) => {
                 if (res.data) {
+                    $window.location.href = "#!/receptionist/client";
                     notyf.success("Cliente registrado correctamente");
                 }
             })

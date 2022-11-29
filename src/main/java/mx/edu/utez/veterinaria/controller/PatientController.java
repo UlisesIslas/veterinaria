@@ -31,6 +31,11 @@ public class PatientController {
         return patientsService.findById(id);
     }
 
+    @GetMapping("/owner/{id}")
+    public List<Patients> findByOwnerId(@PathVariable("id") int id) {
+        return patientsService.findAllByOwnerId(id);
+    }
+
     @PostMapping("/save")
     public boolean save(@RequestBody Patients obj) {
         return patientsService.save(obj);

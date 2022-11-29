@@ -27,6 +27,16 @@ angular
                     controller: "ClientRegisterCtrl",
                     controllerAs: "ctrlClientRegister",
                 })
+                .when("/receptionist/client/", {
+                    templateUrl: "/view/receptionist/client_list.html",
+                    controller: "ClientListCtrl",
+                    controllerAs: "ctrlClientList",
+                })
+                .when("/receptionist/client/pets/:id", {
+                    templateUrl: "/view/receptionist/pet_list.html",
+                    controller: "PetListCtrl",
+                    controllerAs: "ctrlPetList",
+                })
         }
     ]).constant('APP_URL', {
         url: "http://localhost:8080"
