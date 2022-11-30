@@ -23,19 +23,24 @@ angular
                     controllerAs: "ctrlUserList",
                 })
                 .when("/receptionist/client/register", {
-                    templateUrl: "/view/receptionist/client_register.html",
+                    templateUrl: "/view/receptionist/client/client_register.html",
                     controller: "ClientRegisterCtrl",
                     controllerAs: "ctrlClientRegister",
                 })
                 .when("/receptionist/client/", {
-                    templateUrl: "/view/receptionist/client_list.html",
+                    templateUrl: "/view/receptionist/client/client_list.html",
                     controller: "ClientListCtrl",
                     controllerAs: "ctrlClientList",
                 })
                 .when("/receptionist/client/pets/:id", {
-                    templateUrl: "/view/receptionist/pet_list.html",
+                    templateUrl: "/view/receptionist/client/pets/pet_list.html",
                     controller: "PetListCtrl",
                     controllerAs: "ctrlPetList",
+                })
+                .when("/receptionist", {
+                    templateUrl: "/view/receptionist/dashboard.html",
+                    /* controller: "PetListCtrl",
+                    controllerAs: "ctrlPetList", */
                 })
         }
     ]).constant('APP_URL', {
