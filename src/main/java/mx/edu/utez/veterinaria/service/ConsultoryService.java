@@ -24,6 +24,11 @@ public class ConsultoryService {
     public Consultory findById(int id) {
         return consultoryRepository.findById(id).get();
     }
+    
+    @Transactional(readOnly = true)
+    public List<Consultory> findByVisitReason(int id) {
+        return consultoryRepository.findConsultoryByVisitReason(id);
+    }
 
     @Transactional
     public boolean save(Consultory obj) {

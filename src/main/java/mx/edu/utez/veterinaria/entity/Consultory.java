@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +24,10 @@ public class Consultory implements Serializable {
 
     @Column(name = "status", nullable = false)
     private boolean status;
+
+    @ManyToOne
+    @JoinColumn(name = "visit_reason", nullable = false)
+    private VisitReason visitReason;
 
     public Consultory() {
         this.status = true;
@@ -49,6 +55,14 @@ public class Consultory implements Serializable {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public VisitReason getVisitReason() {
+        return visitReason;
+    }
+
+    public void setVisitReason(VisitReason visitReason) {
+        this.visitReason = visitReason;
     }
     
 }

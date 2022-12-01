@@ -31,6 +31,11 @@ public class ScheduleController {
         return scheduleService.findById(id);
     }
 
+    @GetMapping("/pet/{id}")
+    public List<Schedule> findPetScheduleList(@PathVariable("id") int id) {
+        return scheduleService.findPetScheduleList(id);
+    }
+
     @PostMapping("/save")
     public boolean save(@RequestBody Schedule obj) {
         return scheduleService.save(obj);

@@ -1,0 +1,47 @@
+<div ng-init="ctrlPetScheduleRegister.init()"></div>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            Asignar Cita para {{pet.name}}
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    <label for="visitDate">Fecha de Visita</label>
+                    <input type="datetime-local" name="visitDate" id="visitDate" required class="form-control" ng-model="schedule.visitDate">
+                </div>
+                <div class="col-6">
+                    <label for="visitReason">Razón de la Visita</label>
+                    <select name="visitReason" id="visitReason" required class="form-select select2"
+                        ng-model="tmp.visitReason" ng-change="ctrlPetScheduleRegister.selectController()"
+                        ng-options="reason as reason.name for reason in reasonList track by reason.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="col-6 mt-2">
+                    <label for="consultory">Consultorio</label>
+                    <select name="consultory" id="consultory" required class="form-select select2" disabled
+                        ng-model="schedule.consultory"
+                        ng-options="consultory as consultory.name for consultory in consultories track by consultory.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="col-6 mt-2">
+                    <label for="responsible">Asignar Personal</label>
+                    <select name="responsible" id="responsible" required class="form-select select2" disabled
+                        ng-model="schedule.doctor"
+                        ng-options="responsible as responsible.name for responsible in responsibles track by responsible.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <div class="text-end">
+                        <a class="btn btn-secondary" href="http://localhost:8080/#!/receptionist/client/pets/schedule/{{pet.id}}">Cancelar</a>
+                        <button class="btn btn-primary" ng-click="ctrlPetScheduleRegister.save()">Registrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

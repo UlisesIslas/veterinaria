@@ -59,6 +59,11 @@ public class UsersService implements UserDetailsService {
         return usersRepository.findById(id).get();
     }
 
+    @Transactional(readOnly = true)
+    public List<Users> findDoctors() {
+        return usersRepository.findDoctors();
+    }
+
     @Transactional
     public boolean save(Users obj) {
         UserConnection userConnection = new UserConnection();

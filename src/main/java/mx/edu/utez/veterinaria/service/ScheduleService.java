@@ -25,6 +25,11 @@ public class ScheduleService {
         return scheduleRepository.findById(id).get();
     }
 
+    @Transactional(readOnly = true)
+    public List<Schedule> findPetScheduleList(int id) {
+        return scheduleRepository.findPetScheduleList(id);
+    }
+
     @Transactional
     public boolean save(Schedule obj) {
         return scheduleRepository.save(obj) != null;

@@ -64,6 +64,11 @@ public class UsersController {
         return roleService.findRoleById(id);
     }
 
+    @GetMapping("/doctors")
+    public List<Users> findDoctors() {
+        return usersService.findDoctors();
+    }
+
     @GetMapping(value = "/actual")
     public GeneralTemplateResponse getActualUser(@RequestHeader HttpHeaders headers) {
         String token = String.valueOf(headers.get("Authorization"));

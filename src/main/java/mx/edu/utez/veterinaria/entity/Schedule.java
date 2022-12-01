@@ -42,10 +42,6 @@ public class Schedule implements Serializable {
     private int status;
 
     @ManyToOne
-    @JoinColumn(name = "visit_reason", nullable = false)
-    private VisitReason visitReason;
-
-    @ManyToOne
     @JoinColumn(name = "consultory", nullable = true)
     private Consultory consultory;
 
@@ -99,14 +95,6 @@ public class Schedule implements Serializable {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    public VisitReason getVisitReason() {
-        return visitReason;
-    }
-
-    public void setVisitReason(VisitReason visitReason) {
-        this.visitReason = visitReason;
     }
 
     public Consultory getConsultory() {

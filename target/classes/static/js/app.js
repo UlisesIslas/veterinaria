@@ -42,6 +42,16 @@ angular
                     /* controller: "PetListCtrl",
                     controllerAs: "ctrlPetList", */
                 })
+                .when("/receptionist/client/pets/schedule/:id", {
+                    templateUrl: "/view/receptionist/client/pets/schedule/pet_schedule_list.html",
+                    controller: "PetScheduleListCtrl",
+                    controllerAs: "ctrlPetScheduleList",
+                })
+                .when("/receptionist/client/pets/schedule/register/:id", {
+                    templateUrl: "/view/receptionist/client/pets/schedule/pet_schedule_register.html",
+                    controller: "PetScheduleRegisterCtrl",
+                    controllerAs: "ctrlPetScheduleRegister",
+                })
         }
     ]).constant('APP_URL', {
         url: "http://localhost:8080"

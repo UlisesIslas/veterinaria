@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import mx.edu.utez.veterinaria.repository.IUsersRepository;
 import mx.edu.utez.veterinaria.repository.IVisitReasonRepository;
+import mx.edu.utez.veterinaria.entity.Users;
 import mx.edu.utez.veterinaria.entity.VisitReason;
 
 @Service
@@ -14,6 +16,8 @@ public class VisitReasonService {
     
     @Autowired
     private IVisitReasonRepository visitReasonRepository;
+    @Autowired
+    private IUsersRepository usersRepository;
 
     @Transactional(readOnly = true)
     public List<VisitReason> findAll() {
@@ -23,6 +27,11 @@ public class VisitReasonService {
     @Transactional(readOnly = true)
     public VisitReason findById(int id) {
         return visitReasonRepository.findById(id).get();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Users> findUsersForVisitReason(int id) {
+        return usersRepository.findByRole(visitReasonRepository.findById(id).get().getResponsible().getId());
     }
 
     @Transactional

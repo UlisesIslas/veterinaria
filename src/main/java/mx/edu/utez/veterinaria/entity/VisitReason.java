@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +24,10 @@ public class VisitReason implements Serializable {
 
     @Column(name = "cost", nullable = false)
     private double cost;
+
+    @ManyToOne
+    @JoinColumn(name = "responsible", nullable = false)
+    private Roles responsible;
 
     public Integer getId() {
         return id;
@@ -45,6 +51,14 @@ public class VisitReason implements Serializable {
 
     public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    public Roles getResponsible() {
+        return responsible;
+    }
+
+    public void setResponsible(Roles responsible) {
+        this.responsible = responsible;
     }
     
 }

@@ -1,9 +1,16 @@
 package mx.edu.utez.veterinaria.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import mx.edu.utez.veterinaria.entity.Schedule;
 
 public interface IScheduleRepository extends JpaRepository<Schedule, Integer> {
     
+    @Query(value = "SELECT * FROM schedule s WHERE s.patient = :id", nativeQuery = true)
+    List<Schedule> findPetScheduleList(@Param("id") int id);
+
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import mx.edu.utez.veterinaria.entity.Users;
 import mx.edu.utez.veterinaria.entity.VisitReason;
 import mx.edu.utez.veterinaria.service.VisitReasonService;
 
@@ -29,6 +30,11 @@ public class VisitReasonController {
     @GetMapping("/{id}")
     public VisitReason findById(@PathVariable("id") int id) {
         return visitReasonService.findById(id);
+    }
+
+    @GetMapping("/users/{id}")
+    public List<Users> findUsersForVisitReason(@PathVariable("id") int id) {
+        return visitReasonService.findUsersForVisitReason(id);
     }
 
     @PostMapping("/save")

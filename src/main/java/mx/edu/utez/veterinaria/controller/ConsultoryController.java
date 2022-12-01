@@ -31,6 +31,11 @@ public class ConsultoryController {
         return consultoryService.findById(id);
     }
 
+    @GetMapping("/visit/{id}")
+    public List<Consultory> findByVisitReason(@PathVariable("id") int id) {
+        return consultoryService.findByVisitReason(id);
+    }
+
     @PostMapping("/save")
     public boolean save(@RequestBody Consultory obj) {
         return consultoryService.save(obj);
