@@ -9,10 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import mx.edu.utez.veterinaria.entity.OwnerAddress;
 import mx.edu.utez.veterinaria.entity.PatientOwner;
 import mx.edu.utez.veterinaria.entity.Patients;
+import mx.edu.utez.veterinaria.entity.Wallet;
 import mx.edu.utez.veterinaria.entity.dto.OwnerDTO;
 import mx.edu.utez.veterinaria.repository.IOwnerAddressRepository;
 import mx.edu.utez.veterinaria.repository.IPatientOwnerRepository;
 import mx.edu.utez.veterinaria.repository.IPatientsRepository;
+import mx.edu.utez.veterinaria.repository.IWalletRepository;
 
 @Service
 public class PatientOwnerService {
@@ -23,6 +25,8 @@ public class PatientOwnerService {
     private IPatientsRepository patientsRepository;
     @Autowired
     private IOwnerAddressRepository ownerAddressRepository;
+    @Autowired
+    private IWalletRepository walletRepository;
 
     @Transactional(readOnly = true)
     public List<PatientOwner> findAll() {
@@ -47,7 +51,10 @@ public class PatientOwnerService {
         obj.getOwnerAddress().setOwner(owner);
         Patients pet = patientsRepository.save(obj.getPet());
         OwnerAddress address = ownerAddressRepository.save(obj.getOwnerAddress());
-        if (owner != null && pet != null && address != null) {
+        Wallet wallet = new Wallet();
+        wallet.setOwner(owner);
+        wallet.setNumber(owner.getPhone());
+        if (owner != null && pet != null && address != null && walletRepository.save(wallet) != null) {
             flag = true;
         }
         return flag;

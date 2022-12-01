@@ -7,13 +7,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import mx.edu.utez.veterinaria.entity.Schedule;
+import mx.edu.utez.veterinaria.entity.Wallet;
 import mx.edu.utez.veterinaria.repository.IScheduleRepository;
+import mx.edu.utez.veterinaria.repository.IWalletRepository;
 
 @Service
 public class ScheduleService {
 
     @Autowired
     private IScheduleRepository scheduleRepository;
+    @Autowired
+    private IWalletRepository walletRepository;
 
     @Transactional(readOnly = true)
     public List<Schedule> findAll() {
@@ -32,6 +36,13 @@ public class ScheduleService {
 
     @Transactional
     public boolean save(Schedule obj) {
+        return scheduleRepository.save(obj) != null;
+    }
+
+    @Transactional
+    public boolean confirm(Schedule obj) {
+        Wallet wallet = walletRepository.findByOwnerId(obj.getPatient().getId());
+        wallet.setBalance(wallet.getBalance() + (obj.getConsultory().getVisitReason().getCost() * 0.05));
         return scheduleRepository.save(obj) != null;
     }
 

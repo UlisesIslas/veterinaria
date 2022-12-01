@@ -24,9 +24,10 @@
                 <td scope="col">{{schedule.doctor.name}} {{schedule.doctor.lastname}} {{schedule.doctor.surname}}</td>
                 <td scope="col">{{schedule.consultory.visitReason.name}}</td>
                 <td scope="col">
-                    <span class="badge bg-success" ng-if="schedule.status == 1">Asignada</span>
+                    <span class="badge bg-warning" ng-if="schedule.status == 1">Pendiente de Pago</span>
+                    <span class="badge bg-warning" ng-if="schedule.status == 2">Asignada</span>
                     <span class="badge bg-danger" ng-if="schedule.status == 0">Cancelada</span>
-                    <span class="badge bg-primary" ng-if="schedule.status == 2">Atendida</span>
+                    <span class="badge bg-primary" ng-if="schedule.status == 3">Atendida</span>
                 </td>
                 <td scope="col">
                     <button class="btn btn-primary">Reasignar</button>
