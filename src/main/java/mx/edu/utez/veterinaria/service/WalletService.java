@@ -25,6 +25,11 @@ public class WalletService {
         return walletRepository.findById(id).get();
     }
 
+    @Transactional(readOnly = true)
+    public double findWalletBalanceByOwnerId(int id) {
+        return walletRepository.findWalletBalanceByOwnerId(id);
+    }
+
     @Transactional
     public boolean save(Wallet obj) {
         return walletRepository.save(obj) != null;

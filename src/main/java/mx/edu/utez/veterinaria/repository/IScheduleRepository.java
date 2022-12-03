@@ -10,7 +10,10 @@ import mx.edu.utez.veterinaria.entity.Schedule;
 
 public interface IScheduleRepository extends JpaRepository<Schedule, Integer> {
     
-    @Query(value = "SELECT * FROM schedule s WHERE s.patient = :id", nativeQuery = true)
+    @Query(value = "SELECT * FROM schedule s WHERE s.patient = :id ORDER BY s.visit_date ASC", nativeQuery = true)
     List<Schedule> findPetScheduleList(@Param("id") int id);
+
+    @Query(value = "SELECT * FROM schedule s ORDER BY s.visit_date ASC", nativeQuery = true)
+    List<Schedule> findOrderedSchedules();
 
 }

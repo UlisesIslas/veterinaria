@@ -34,6 +34,11 @@ public class ScheduleService {
         return scheduleRepository.findPetScheduleList(id);
     }
 
+    @Transactional(readOnly = true)
+    public List<Schedule> findOrderedSchedules() {
+        return scheduleRepository.findOrderedSchedules();
+    }
+
     @Transactional
     public boolean save(Schedule obj) {
         return scheduleRepository.save(obj) != null;
@@ -41,9 +46,31 @@ public class ScheduleService {
 
     @Transactional
     public boolean confirm(Schedule obj) {
-        Wallet wallet = walletRepository.findByOwnerId(obj.getPatient().getId());
-        wallet.setBalance(wallet.getBalance() + (obj.getConsultory().getVisitReason().getCost() * 0.05));
-        return scheduleRepository.save(obj) != null;
+        if (obj.getStatus() == 2) {
+            Wallet wallet = walletRepository.findByOwnerId(obj.getPatient().getOwner().getId());
+            wallet.setBalance(wallet.getBalance() + (obj.getConsultory().getVisitReason().getCost() * 0.05));
+            return scheduleRepository.save(obj) != null && walletRepository.save(wallet) != null;
+        } else if (obj.getStatus() == 0) {
+            Wallet wallet = walletRepository.findByOwnerId(obj.getPatient().getOwner().getId());
+            wallet.setBalance(wallet.getBalance() - (obj.getConsultory().getVisitReason().getCost() * 0.05));
+            return scheduleRepository.save(obj) != null && walletRepository.save(wallet) != null;
+        }
+        return false;
+    }
+
+    @Transactional
+    public boolean walletPay(Schedule obj) {
+        if (obj.getStatus() == 2) {
+            Wallet wallet = walletRepository.findByOwnerId(obj.getPatient().getOwner().getId());
+            if (wallet.getBalance() > obj.getConsultory().getVisitReason().getCost()) {
+                wallet.setBalance(wallet.getBalance() - obj.getConsultory().getVisitReason().getCost());
+            } else {
+                wallet.setBalance(0);
+            }
+            wallet.setBalance(wallet.getBalance() + (obj.getConsultory().getVisitReason().getCost() * 0.05));
+            return scheduleRepository.save(obj) != null && walletRepository.save(wallet) != null;
+        }
+        return false;
     }
 
     @Transactional
@@ -55,5 +82,5 @@ public class ScheduleService {
         }
         return false;
     }
-    
+
 }

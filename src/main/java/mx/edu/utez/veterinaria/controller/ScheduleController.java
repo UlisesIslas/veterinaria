@@ -23,7 +23,7 @@ public class ScheduleController {
 
     @GetMapping()
     public List<Schedule> findAll() {
-        return scheduleService.findAll();
+        return scheduleService.findOrderedSchedules();
     }
 
     @GetMapping("/{id}")
@@ -34,6 +34,16 @@ public class ScheduleController {
     @GetMapping("/pet/{id}")
     public List<Schedule> findPetScheduleList(@PathVariable("id") int id) {
         return scheduleService.findPetScheduleList(id);
+    }
+
+    @PostMapping("/pay")
+    public boolean pay(@RequestBody Schedule obj) {
+        return scheduleService.confirm(obj);
+    }
+
+    @PostMapping("/wallet/pay")
+    public boolean payWithWallet(@RequestBody Schedule obj) {
+        return scheduleService.walletPay(obj);
     }
 
     @PostMapping("/save")

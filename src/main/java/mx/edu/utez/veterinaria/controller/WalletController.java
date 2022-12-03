@@ -31,6 +31,11 @@ public class WalletController {
         return walletService.findById(id);
     }
 
+    @GetMapping("/balance/{id}")
+    public double findWalletBalanceByOwnerId(@PathVariable("id") int id) {
+        return walletService.findWalletBalanceByOwnerId(id);
+    }
+
     @PostMapping("/save")
     public boolean save(@RequestBody Wallet obj) {
         return walletService.save(obj);
