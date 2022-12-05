@@ -48,6 +48,11 @@ public class ScheduleService {
         return scheduleRepository.findOrderedSchedules();
     }
 
+    @Transactional(readOnly = true)
+    public List<Schedule> findOrderedSchedulesByUser(int id) {
+        return scheduleRepository.findOrderedSchedulesByUser(id);
+    }
+
     @Transactional
     public boolean save(Schedule obj) {
         return scheduleRepository.save(obj) != null;

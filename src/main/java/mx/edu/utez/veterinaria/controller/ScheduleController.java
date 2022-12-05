@@ -42,6 +42,12 @@ public class ScheduleController {
         return scheduleService.findPetScheduleList(id);
     }
 
+    @GetMapping("/self")
+    public List<Schedule> findOrderedSchedulesByUser(@RequestHeader HttpHeaders headers) {
+        String token = String.valueOf(headers.get("Authorization"));
+        return scheduleService.findOrderedSchedulesByUser(authCheckPermission.findUserByToken(token).getId());
+    }
+
     @PostMapping("/pay")
     public boolean pay(@RequestBody Schedule obj, @RequestHeader HttpHeaders headers) {
         String token = String.valueOf(headers.get("Authorization"));

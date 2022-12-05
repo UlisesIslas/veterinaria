@@ -60,6 +60,11 @@ angular
                     controller: "ScheduleRegisterCtrl",
                     controllerAs: "ctrlScheduleRegister",
                 })
+                .when("/my-schedules", {
+                    templateUrl: "/view/doctor/schedule_list.html",
+                    controller: "DrScheduleListCtrl",
+                    controllerAs: "ctrlDrScheduleList",
+                })
         }
     ]).constant('APP_URL', {
         url: "http://localhost:8080"

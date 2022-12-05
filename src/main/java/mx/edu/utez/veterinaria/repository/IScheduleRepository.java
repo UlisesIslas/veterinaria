@@ -16,4 +16,7 @@ public interface IScheduleRepository extends JpaRepository<Schedule, Integer> {
     @Query(value = "SELECT * FROM schedule s ORDER BY s.visit_date ASC", nativeQuery = true)
     List<Schedule> findOrderedSchedules();
 
+    @Query(value = "SELECT * FROM schedule s WHERE s.doctor = :id ORDER BY s.visit_date ASC", nativeQuery = true)
+    List<Schedule> findOrderedSchedulesByUser(@Param("id") int id);
+
 }

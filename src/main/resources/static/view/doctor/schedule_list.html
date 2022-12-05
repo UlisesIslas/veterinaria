@@ -1,0 +1,37 @@
+<div ng-init="ctrlDrScheduleList.init()"></div>
+<div class="container">
+    <div class="row">
+        <h2 style="padding-top: 30px; text-align: center;" class="col-md-10">Mis Citas Agendadas</h2>
+    </div>
+    <table class="table" id="list">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Mascota</th>
+                <th scope="col">Dueño</th>
+                <th scope="col">Consultorio</th>
+                <th scope="col">Fecha de la Cita</th>
+                <th scope="col">Tipo de Cita</th>
+                <th scope="col">Estatus</th>
+                <th scope="col">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="schedule in scheduleList" repeat-done="initDataTable">
+                <td scope="col">{{$index+1}}</td>
+                <td scope="col">{{schedule.patient.name}}</td>
+                <td scope="col">{{schedule.patient.owner.name}} {{schedule.patient.owner.lastname}} {{schedule.patient.owner.surname}}</td>
+                <td scope="col">{{schedule.consultory.name}}</td>
+                <td scope="col">{{schedule.visitDate | date:'dd/MMM/yyyy HH:mm'}}</td>
+                <td scope="col">{{schedule.consultory.visitReason.name}}</td>
+                <td scope="col">
+                    <span class="badge bg-primary" ng-if="schedule.status == 2">Asignada</span>
+                    <span class="badge bg-info" ng-if="schedule.status == 3">Atendida</span>
+                </td>
+                <td scope="col">
+                    <button class="btn btn-primary btn-sm" ng-if="schedule.status == 2" ng-click="ctrlScheduleList.setModalObj(schedule)">Completar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
