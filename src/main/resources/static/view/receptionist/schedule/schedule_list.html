@@ -9,6 +9,8 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Mascota</th>
+                <th scope="col">Dueño</th>
                 <th scope="col">Consultorio</th>
                 <th scope="col">Fecha de la Cita</th>
                 <th scope="col">Doctor</th>
@@ -20,8 +22,10 @@
         <tbody>
             <tr ng-repeat="schedule in scheduleList" repeat-done="initDataTable">
                 <td scope="col">{{$index+1}}</td>
+                <td scope="col">{{schedule.patient.name}}</td>
+                <td scope="col">{{schedule.patient.owner.name}} {{schedule.patient.owner.lastname}} {{schedule.patient.owner.surname}}</td>
                 <td scope="col">{{schedule.consultory.name}}</td>
-                <td scope="col">{{schedule.visitDate}}</td>
+                <td scope="col">{{schedule.visitDate | date:'dd/MMM/yyyy HH:mm'}}</td>
                 <td scope="col">{{schedule.doctor.name}} {{schedule.doctor.lastname}} {{schedule.doctor.surname}}</td>
                 <td scope="col">{{schedule.consultory.visitReason.name}}</td>
                 <td scope="col">
@@ -31,10 +35,10 @@
                     <span class="badge bg-info" ng-if="schedule.status == 3">Atendida</span>
                 </td>
                 <td scope="col">
-                    <button class="btn btn-primary" ng-if="schedule.status == 1" ng-click="ctrlScheduleList.paymentAlert(schedule)">Pagar</button>
-                    <button class="btn btn-primary" ng-if="schedule.status == 2" ng-click="ctrlScheduleList.setModalObj(schedule)" data-bs-toggle="modal"
+                    <button class="btn btn-primary btn-sm" ng-if="schedule.status == 1" ng-click="ctrlScheduleList.paymentAlert(schedule)">Pagar</button>
+                    <button class="btn btn-primary btn-sm" ng-if="schedule.status == 2" ng-click="ctrlScheduleList.setModalObj(schedule)" data-bs-toggle="modal"
                       data-bs-target="#exampleModal">Reasignar</button>
-                    <button class="btn btn-danger" ng-if="schedule.status == 2 || schedule.status == 1" ng-click="ctrlScheduleList.cancel(schedule, 0)">Cancelar</button>
+                    <button class="btn btn-danger btn-sm" ng-if="schedule.status == 2 || schedule.status == 1" ng-click="ctrlScheduleList.cancel(schedule, 0)">Cancelar</button>
                 </td>
             </tr>
         </tbody>

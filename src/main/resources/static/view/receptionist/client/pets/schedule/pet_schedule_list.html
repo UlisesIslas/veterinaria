@@ -21,7 +21,7 @@
             <tr ng-repeat="schedule in scheduleList" repeat-done="initDataTable">
                 <td scope="col">{{$index+1}}</td>
                 <td scope="col">{{schedule.consultory.name}}</td>
-                <td scope="col">{{schedule.visitDate}}</td>
+                <td scope="col">{{schedule.visitDate | date:'dd/MMM/yyyy HH:mm'}}</td>
                 <td scope="col">{{schedule.doctor.name}} {{schedule.doctor.lastname}} {{schedule.doctor.surname}}</td>
                 <td scope="col">{{schedule.consultory.visitReason.name}}</td>
                 <td scope="col">

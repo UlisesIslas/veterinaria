@@ -8,13 +8,53 @@
             <div class="row">
                 <div class="col-6">
                     <label for="owner">Propietario</label>
-                    <select name="owner" id="owner" required class="form-select select2" ng-model="tmp.owner"
+                    <select name="owner" id="owner" required class="form-select select2" ng-model="tmp.owner" ng-change="ctrlScheduleRegister.findOwnersPets()"
                         ng-options="owner as (owner.name + ' ' + owner.lastname + ' ' + owner.surname) for owner in owners track by owner.id">
                         <option value=""></option>
                     </select>
                 </div>
                 <div class="col-6">
-                    <label for="pet"></label>
+                    <label for="pet">Mascota</label>
+                    <select name="pet" id="pet" required class="form-select select2" disabled
+                        ng-model="schedule.patient" ng-options="pet as pet.name for pet in pets track by pet.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="col-6 mt-2">
+                    <label for="visitDate">Fecha de Visita</label>
+                    <input type="datetime-local" name="visitDate" id="visitDate" required class="form-control"
+                        ng-model="schedule.visitDate">
+                </div>
+                <div class="col-6 mt-2">
+                    <label for="visitReason">Razón de la Visita</label>
+                    <select name="visitReason" id="visitReason" required class="form-select select2"
+                        ng-model="tmp.visitReason" ng-change="ctrlScheduleRegister.selectController()"
+                        ng-options="reason as reason.name for reason in reasonList track by reason.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="col-6 mt-2">
+                    <label for="consultory">Consultorio</label>
+                    <select name="consultory" id="consultory" required class="form-select select2"
+                        ng-model="schedule.consultory" disabled
+                        ng-options="consultory as consultory.name for consultory in consultories track by consultory.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="col-6 mt-2">
+                    <label for="doctor">Asignar Personal</label>
+                    <select name="doctor" id="doctor" required class="form-select select2" ng-model="schedule.doctor"
+                        disabled
+                        ng-options="responsible as (responsible.name + ' ' + responsible.lastname + ' ' + responsible.surname) for responsible in responsibles track by responsible.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <div class="text-end">
+                        <a class="btn btn-secondary" href="http://localhost:8080/#!/receptionist/schedule">Cancelar</a>
+                        <button class="btn btn-primary" ng-click="ctrlScheduleRegister.save()">Registrar</button>
+                    </div>
                 </div>
             </div>
         </div>
