@@ -30,7 +30,7 @@
                     <label for="responsible">Asignar Personal</label>
                     <select name="responsible" id="responsible" required class="form-select select2" disabled
                         ng-model="schedule.doctor"
-                        ng-options="responsible as responsible.name for responsible in responsibles track by responsible.id">
+                        ng-options="responsible as (responsible.name + ' ' + responsible.lastname + ' ' + responsible.surname) for responsible in responsibles track by responsible.id">
                         <option value=""></option>
                     </select>
                 </div>

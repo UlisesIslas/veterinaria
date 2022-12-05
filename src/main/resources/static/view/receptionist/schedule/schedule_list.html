@@ -1,9 +1,9 @@
-<div ng-init="ctrlPetScheduleList.init()"></div>
+<div ng-init="ctrlScheduleList.init()"></div>
 <div class="container">
     <div class="row">
-        <h2 style="padding-top: 30px; text-align: center;" class="col-md-10">Citas de {{pet.name}}</h2>
+        <h2 style="padding-top: 30px; text-align: center;" class="col-md-10">Citas Agendadas</h2>
         <a class="btn btn-info col-md-2" style="margin: 30px 0px; width: 10%"
-            href="http://localhost:8080/#!/receptionist/client/pets/schedule/register/{{pet.id}}">Asignar Cita</a>
+            href="http://localhost:8080/#!/receptionist/schedule/register">Agendar Cita</a>
     </div>
     <table class="table" id="list">
         <thead>
@@ -31,10 +31,10 @@
                     <span class="badge bg-info" ng-if="schedule.status == 3">Atendida</span>
                 </td>
                 <td scope="col">
-                    <button class="btn btn-primary" ng-if="schedule.status == 1" ng-click="ctrlPetScheduleList.paymentAlert(schedule)">Pagar</button>
-                    <button class="btn btn-primary" ng-if="schedule.status == 2" ng-click="ctrlPetScheduleList.setModalObj(schedule)" data-bs-toggle="modal"
+                    <button class="btn btn-primary" ng-if="schedule.status == 1" ng-click="ctrlScheduleList.paymentAlert(schedule)">Pagar</button>
+                    <button class="btn btn-primary" ng-if="schedule.status == 2" ng-click="ctrlScheduleList.setModalObj(schedule)" data-bs-toggle="modal"
                       data-bs-target="#exampleModal">Reasignar</button>
-                    <button class="btn btn-danger" ng-if="schedule.status == 2 || schedule.status == 1" ng-click="ctrlPetScheduleList.cancel(schedule, 0)">Cancelar</button>
+                    <button class="btn btn-danger" ng-if="schedule.status == 2 || schedule.status == 1" ng-click="ctrlScheduleList.cancel(schedule, 0)">Cancelar</button>
                 </td>
             </tr>
         </tbody>
@@ -55,7 +55,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" ng-click="ctrlPetScheduleList.update()">Reasignar</button>
+          <button type="button" class="btn btn-primary" ng-click="ctrlScheduleList.update()">Reasignar</button>
         </div>
       </div>
     </div>

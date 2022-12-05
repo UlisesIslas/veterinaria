@@ -39,8 +39,6 @@ angular
                 })
                 .when("/receptionist", {
                     templateUrl: "/view/receptionist/dashboard.html",
-                    /* controller: "PetListCtrl",
-                    controllerAs: "ctrlPetList", */
                 })
                 .when("/receptionist/client/pets/schedule/:id", {
                     templateUrl: "/view/receptionist/client/pets/schedule/pet_schedule_list.html",
@@ -51,6 +49,16 @@ angular
                     templateUrl: "/view/receptionist/client/pets/schedule/pet_schedule_register.html",
                     controller: "PetScheduleRegisterCtrl",
                     controllerAs: "ctrlPetScheduleRegister",
+                })
+                .when("/receptionist/schedule", {
+                    templateUrl: "/view/receptionist/schedule/schedule_list.html",
+                    controller: "ScheduleListCtrl",
+                    controllerAs: "ctrlScheduleList",
+                })
+                .when("/receptionist/schedule/register", {
+                    templateUrl: "/view/receptionist/schedule/schedule_register.html",
+                    controller: "ScheduleRegisterCtrl",
+                    controllerAs: "ctrlScheduleRegister",
                 })
         }
     ]).constant('APP_URL', {

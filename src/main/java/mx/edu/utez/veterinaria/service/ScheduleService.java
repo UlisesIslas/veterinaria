@@ -6,9 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import mx.edu.utez.veterinaria.entity.Cart;
 import mx.edu.utez.veterinaria.entity.Schedule;
+import mx.edu.utez.veterinaria.entity.Tickets;
+import mx.edu.utez.veterinaria.entity.Users;
 import mx.edu.utez.veterinaria.entity.Wallet;
+import mx.edu.utez.veterinaria.repository.ICartRepository;
 import mx.edu.utez.veterinaria.repository.IScheduleRepository;
+import mx.edu.utez.veterinaria.repository.ITicketsRepository;
 import mx.edu.utez.veterinaria.repository.IWalletRepository;
 
 @Service
@@ -18,6 +23,10 @@ public class ScheduleService {
     private IScheduleRepository scheduleRepository;
     @Autowired
     private IWalletRepository walletRepository;
+    @Autowired
+    private ITicketsRepository ticketsRepository;
+    @Autowired
+    private ICartRepository cartRepository;
 
     @Transactional(readOnly = true)
     public List<Schedule> findAll() {
@@ -45,21 +54,32 @@ public class ScheduleService {
     }
 
     @Transactional
-    public boolean confirm(Schedule obj) {
+    public boolean confirm(Schedule obj, Users user) {
         if (obj.getStatus() == 2) {
             Wallet wallet = walletRepository.findByOwnerId(obj.getPatient().getOwner().getId());
             wallet.setBalance(wallet.getBalance() + (obj.getConsultory().getVisitReason().getCost() * 0.05));
-            return scheduleRepository.save(obj) != null && walletRepository.save(wallet) != null;
+            Tickets ticket = new Tickets();
+            ticket.setSeller(user);
+            ticket.setOwner(obj.getPatient().getOwner());
+            ticket = ticketsRepository.save(ticket);
+            Cart cart = new Cart();
+            cart.setSchedule(obj);
+            cart.setTicket(ticket);
+            return scheduleRepository.save(obj) != null && walletRepository.save(wallet) != null
+                    && cartRepository.save(cart) != null;
         } else if (obj.getStatus() == 0) {
             Wallet wallet = walletRepository.findByOwnerId(obj.getPatient().getOwner().getId());
             wallet.setBalance(wallet.getBalance() - (obj.getConsultory().getVisitReason().getCost() * 0.05));
-            return scheduleRepository.save(obj) != null && walletRepository.save(wallet) != null;
+            Tickets ticket = ticketsRepository.findById(cartRepository.findByScheduleId(obj.getId()).getTicket().getFolio()).get();
+            ticket.setStatus(0);
+            return scheduleRepository.save(obj) != null && walletRepository.save(wallet) != null
+                    && ticketsRepository.save(ticket) != null;
         }
         return false;
     }
 
     @Transactional
-    public boolean walletPay(Schedule obj) {
+    public boolean walletPay(Schedule obj, Users user) {
         if (obj.getStatus() == 2) {
             Wallet wallet = walletRepository.findByOwnerId(obj.getPatient().getOwner().getId());
             if (wallet.getBalance() > obj.getConsultory().getVisitReason().getCost()) {
@@ -68,7 +88,15 @@ public class ScheduleService {
                 wallet.setBalance(0);
             }
             wallet.setBalance(wallet.getBalance() + (obj.getConsultory().getVisitReason().getCost() * 0.05));
-            return scheduleRepository.save(obj) != null && walletRepository.save(wallet) != null;
+            Tickets ticket = new Tickets();
+            ticket.setSeller(user);
+            ticket.setOwner(obj.getPatient().getOwner());
+            ticket = ticketsRepository.save(ticket);
+            Cart cart = new Cart();
+            cart.setSchedule(obj);
+            cart.setTicket(ticket);
+            return scheduleRepository.save(obj) != null && walletRepository.save(wallet) != null
+                    && cartRepository.save(cart) != null;
         }
         return false;
     }

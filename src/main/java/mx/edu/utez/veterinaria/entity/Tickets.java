@@ -32,8 +32,13 @@ public class Tickets implements Serializable {
     @JoinColumn(name = "owner", nullable = false)
     private PatientOwner owner;
 
+    @Column(name = "status", nullable = false)
+    private int status;
+
     public Tickets() {
         this.folio = UUID.randomUUID().toString();
+        this.saleDate = new Date();
+        this.status = 1;
     }
 
     public String getFolio() {
@@ -66,6 +71,14 @@ public class Tickets implements Serializable {
 
     public void setOwner(PatientOwner owner) {
         this.owner = owner;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
     
 }
