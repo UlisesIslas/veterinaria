@@ -1,62 +1,69 @@
+<div ng-init="redirectHandler2('ROLE_RECEPCIONISTA')"></div>
 <div ng-init="ctrlPetScheduleList.init()"></div>
 <div class="container">
-    <div class="row">
-        <h2 style="padding-top: 30px; text-align: center;" class="col-md-10">Citas de {{pet.name}}</h2>
-        <a class="btn btn-info col-md-2" style="margin: 30px 0px; width: 10%"
-            href="http://localhost:8080/#!/receptionist/client/pets/schedule/register/{{pet.id}}">Asignar Cita</a>
-    </div>
-    <table class="table" id="list">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Consultorio</th>
-                <th scope="col">Fecha de la Cita</th>
-                <th scope="col">Doctor</th>
-                <th scope="col">Tipo de Cita</th>
-                <th scope="col">Estatus</th>
-                <th scope="col">Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="schedule in scheduleList" repeat-done="initDataTable">
-                <td scope="col">{{$index+1}}</td>
-                <td scope="col">{{schedule.consultory.name}}</td>
-                <td scope="col">{{schedule.visitDate | date:'dd/MMM/yyyy HH:mm'}}</td>
-                <td scope="col">{{schedule.doctor.name}} {{schedule.doctor.lastname}} {{schedule.doctor.surname}}</td>
-                <td scope="col">{{schedule.consultory.visitReason.name}}</td>
-                <td scope="col">
-                    <span class="badge bg-warning" ng-if="schedule.status == 1">Pendiente de Pago</span>
-                    <span class="badge bg-primary" ng-if="schedule.status == 2">Asignada</span>
-                    <span class="badge bg-danger" ng-if="schedule.status == 0">Cancelada</span>
-                    <span class="badge bg-info" ng-if="schedule.status == 3">Atendida</span>
-                </td>
-                <td scope="col">
-                    <button class="btn btn-primary" ng-if="schedule.status == 1" ng-click="ctrlPetScheduleList.paymentAlert(schedule)">Pagar</button>
-                    <button class="btn btn-primary" ng-if="schedule.status == 2" ng-click="ctrlPetScheduleList.setModalObj(schedule)" data-bs-toggle="modal"
-                      data-bs-target="#exampleModal">Reasignar</button>
-                    <button class="btn btn-danger" ng-if="schedule.status == 2 || schedule.status == 1" ng-click="ctrlPetScheduleList.cancel(schedule, 0)">Cancelar</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+  <div class="row">
+    <h2 style="padding-top: 30px; text-align: center;" class="col-md-10">Citas de {{pet.name}}</h2>
+    <a class="btn btn-info col-md-2" style="margin: 30px 0px; width: 10%"
+      href="http://localhost:8080/#!/receptionist/client/pets/schedule/register/{{pet.id}}">Asignar Cita</a>
+  </div>
+  <table class="table" id="list">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Consultorio</th>
+        <th scope="col">Fecha de la Cita</th>
+        <th scope="col">Doctor</th>
+        <th scope="col">Tipo de Cita</th>
+        <th scope="col">Estatus</th>
+        <th scope="col">Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="schedule in scheduleList" repeat-done="initDataTable">
+        <td scope="col">{{$index+1}}</td>
+        <td scope="col">{{schedule.consultory.name}}</td>
+        <td scope="col">{{schedule.visitDate | date:'dd/MMM/yyyy HH:mm'}}</td>
+        <td scope="col">{{schedule.doctor.name}} {{schedule.doctor.lastname}} {{schedule.doctor.surname}}</td>
+        <td scope="col">{{schedule.consultory.visitReason.name}}</td>
+        <td scope="col">
+          <span class="badge bg-warning" ng-if="schedule.status == 1">Pendiente de Pago</span>
+          <span class="badge bg-primary" ng-if="schedule.status == 2">Asignada</span>
+          <span class="badge bg-danger" ng-if="schedule.status == 0">Cancelada</span>
+          <span class="badge bg-info" ng-if="schedule.status == 3">Atendida</span>
+        </td>
+        <td scope="col">
+          <button class="btn btn-primary" ng-if="schedule.status == 1"
+            ng-click="ctrlPetScheduleList.paymentAlert(schedule)">Pagar</button>
+          <button class="btn btn-primary" ng-if="schedule.status == 2"
+            ng-click="ctrlPetScheduleList.setModalObj(schedule)" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">Reasignar</button>
+          <button class="btn btn-danger" ng-if="schedule.status == 2 || schedule.status == 1"
+            ng-click="ctrlPetScheduleList.cancel(schedule, 0)">Cancelar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 
 <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form class="needs-validation" novalidate>
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Reasignar Cita</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <label for="newVisitDate">Nueva Fecha de Visita</label>
-          <input type="datetime-local" name="newVisitDate" id="newVisitDate" class="form-control" ng-model="modalObj.visitDate">
+          <input type="datetime-local" name="newVisitDate" id="newVisitDate" class="form-control"
+            ng-model="modalObj.visitDate">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" ng-click="ctrlPetScheduleList.update()">Reasignar</button>
+          <button type="submit" class="btn btn-primary">Reasignar</button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
+</div>

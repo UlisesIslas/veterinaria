@@ -9,7 +9,7 @@
                 <img src="./images/paw2.png" style="width: 35%;" height="35%">
             </div><!-- SOCIAL LOGIN -->
 
-            <form class="the-form">
+            <form class="needs-validation the-form" novalidate>
 
                 <label for="email">Correo electrónico</label>
                 <input type="email" name="email" id="email" required class="form-control" ng-model="user.username" placeholder="Ingresa tu correo electrónico">
@@ -17,7 +17,7 @@
                 <label for="password">Contraseña</label>
                 <input type="password" name="password" id="password" required class="form-control" ng-model="user.password" placeholder="Ingresa tu contraseña">
 
-                <input type="submit" value="Ingresar" ng-click="ctrlLogin.beforeLogin()">
+                <input type="submit" value="Ingresar">
 
             </form>
 

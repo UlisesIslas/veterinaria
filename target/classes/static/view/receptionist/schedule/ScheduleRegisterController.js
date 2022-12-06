@@ -18,14 +18,27 @@ angular.module("routingApp").controller("ScheduleRegisterCtrl", [
         });
 
         this.init = () => {
-            if (localStorage.getItem("token")) {
-                if (localStorage.getItem("role") == "ROLE_RECEPCIONISTA") {
-                    this.findVisitReasons();
-                    this.findOwners();
-                }
-            }
-            $window.location.href = "/#!/login";
+            this.findVisitReasons();
+            this.findOwners();
         }
+
+        (() => {
+            "use strict";
+            const forms = document.querySelectorAll(".needs-validation");
+            Array.prototype.slice.call(forms).forEach((form) => {
+                form.addEventListener(
+                    "submit",
+                    (event) => {
+                        if(!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            notyf.error("Llena los campos necesarios");
+                        } else {
+                            this.save();
+                        }form.classList.add("was-validated");
+                    }, false)
+            });
+        })();
 
         this.findOwners = () => {
             return $http({

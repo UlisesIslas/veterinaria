@@ -19,29 +19,23 @@ angular.module("routingApp").controller("UserListCtrl", [
         });
 
         this.getUsers = () => {
-            if (localStorage.getItem("token")) {
-                if (localStorage.getItem("role") == "ROLE_ADMINISTRADOR") {
-                    $scope.showNav = true;
-                    return $http({
-                        method: "GET",
-                        url: `${APP_URL.url}/users`,
-                        headers: {
-                            "Content-Type": "application/json",
-                            Accept: "application/json",
-                            authorization: $scope.token,
-                        },
-                    }).then((res) => {
-                        if (res.data.code == 200) {
-                            $scope.usersList = res.data.object;
-                            setTimeout(executeDataTable, 10);
-                        } else {
-                            notyf.error(res.data.message);
-                        }
-                    });
+            $scope.showNav = true;
+            return $http({
+                method: "GET",
+                url: `${APP_URL.url}/users`,
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    authorization: $scope.token,
+                },
+            }).then((res) => {
+                if (res.data.code == 200) {
+                    $scope.usersList = res.data.object;
+                    setTimeout(executeDataTable, 10);
+                } else {
+                    notyf.error(res.data.message);
                 }
-            }
-            $scope.showNav = false;
-            $window.location.href = "/#!/login"
+            });
         }
 
         function executeDataTable() {

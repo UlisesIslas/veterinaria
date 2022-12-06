@@ -17,12 +17,7 @@ angular.module("routingApp").controller("DrScheduleListCtrl", [
             },
         });
         this.init = () => {
-            if (localStorage.getItem("token")) {
-                if (localStorage.getItem("role") == "ROLE_DOCTOR" || localStorage.getItem("role") == "ROLE_ESTILISTA") {
-                    this.findScheduleList();
-                }
-            }
-            $window.location.href = "/#!/login";
+            this.findScheduleList();
         }
 
         this.findScheduleList = () => {

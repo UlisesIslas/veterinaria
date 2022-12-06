@@ -50,6 +50,34 @@ angular.module("routingApp").controller("LoginCtrl", [
             }
         }
 
+        $scope.redirectHandler2 = (target) => {
+            if (localStorage.getItem("token")) {
+                if (localStorage.getItem("role") != target && localStorage.getItem("role") != "ROLE_ESTILISTA") {
+                    $scope.redirectHandler();
+                }
+            } else {
+                $window.location.href = "/#!/login";
+            }
+        }
+
+        (() => {
+            "use strict";
+            const forms = document.querySelectorAll(".needs-validation");
+            Array.prototype.slice.call(forms).forEach((form) => {
+                form.addEventListener(
+                    "submit",
+                    (event) => {
+                        if(!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            notyf.error("Llena los campos necesarios");
+                        } else {
+                            this.beforeLogin();
+                        }form.classList.add("was-validated");
+                    }, false)
+            });
+        })();
+
         $scope.getToken = function () {
             $rootScope.role = localStorage.getItem("role");
             if (localStorage.getItem("token")) {

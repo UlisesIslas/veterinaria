@@ -1,3 +1,4 @@
+<div ng-init="redirectHandler2('ROLE_ADMINISTRADOR')"></div>
 <div ng-init="ctrlUserList.getUsers()"></div>
 <div class="container">
     <div class="row">
@@ -13,7 +14,6 @@
                 <th scope="col">Teléfono</th>
                 <th scope="col">Rol</th>
                 <th scope="col">Salario</th>
-                <th scope="col">Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -24,10 +24,6 @@
                 <td scope="col">{{user.phone}}</td>
                 <td scope="col">{{user.roles.alias}}</td>
                 <td scope="col">{{user.salary}}</td>
-                <td scope="col">
-                    <button class="btn btn-primary btn-sm px-3">Editar</button>
-                    <button class="btn btn-secondary btn-sm px-3">Detalles</button>
-                </td>
             </tr>
         </tbody>
     </table>

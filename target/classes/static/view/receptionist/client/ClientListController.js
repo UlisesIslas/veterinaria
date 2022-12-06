@@ -18,23 +18,18 @@ angular.module("routingApp").controller("ClientListCtrl", [
         });
 
         this.findOwners = () => {
-            if (localStorage.getItem("token")) {
-                if (localStorage.getItem("role") == "ROLE_RECEPCIONISTA") {
-                    return $http({
-                        method: "GET",
-                        url: `${APP_URL.url}/owner`,
-                        headers: {
-                            "Content-Type": "application/json",
-                            Accept: "application/json",
-                            authorization: $scope.token,
-                        },
-                    }).then((res) => {
-                        $scope.ownersList = res.data;
-                        setTimeout(executeDataTable, 10);
-                    })
-                }
-            }
-            $window.location.href = "/#!/login";
+            return $http({
+                method: "GET",
+                url: `${APP_URL.url}/owner`,
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    authorization: $scope.token,
+                },
+            }).then((res) => {
+                $scope.ownersList = res.data;
+                setTimeout(executeDataTable, 10);
+            })
         }
 
         function executeDataTable() {

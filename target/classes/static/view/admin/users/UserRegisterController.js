@@ -33,22 +33,35 @@ angular.module("routingApp").controller("UserRegisterCtrl", [
         };
 
         this.getRoles = () => {
-            if (localStorage.getItem("token")) {
-                if (localStorage.getItem("role") == "ROLE_ADMINISTRADOR") {
-                    return $http({
-                        method: "GET",
-                        url: `${APP_URL.url}/users/roles`,
-                        headers: {
-                            "Content-Type": "application/json",
-                            Accept: "application/json",
-                        },
-                    }).then((res) => {
-                        $scope.listRoles = res.data;
-                    })
-                }
-            }
-            $window.location.href = "/#!/login";
+            return $http({
+                method: "GET",
+                url: `${APP_URL.url}/users/roles`,
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+            }).then((res) => {
+                $scope.listRoles = res.data;
+            })
         }
+
+        (() => {
+            "use strict";
+            const forms = document.querySelectorAll(".needs-validation");
+            Array.prototype.slice.call(forms).forEach((form) => {
+                form.addEventListener(
+                    "submit",
+                    (event) => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            notyf.error("Llena los campos necesarios");
+                        } else {
+                            this.save();
+                        } form.classList.add("was-validated");
+                    }, false)
+            });
+        })();
 
         this.save = () => {
             if ($scope.user.password != null && $scope.user.password2 != null) {

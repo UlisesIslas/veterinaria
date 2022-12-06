@@ -20,15 +20,28 @@ angular.module("routingApp").controller("PetListCtrl", [
         $scope.owner = {};
 
         this.init = () => {
-            if (localStorage.getItem("token")) {
-                if (localStorage.getItem("role") == "ROLE_RECEPCIONISTA") {
-                    this.findOwner();
-                    this.findOwnerPets();
-                    this.getAnimalTypes();
-                }
-            }
-            $window.location.href = "/#!/login";
+            this.findOwner();
+            this.findOwnerPets();
+            this.getAnimalTypes();
         }
+
+        (() => {
+            "use strict";
+            const forms = document.querySelectorAll(".needs-validation");
+            Array.prototype.slice.call(forms).forEach((form) => {
+                form.addEventListener(
+                    "submit",
+                    (event) => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            notyf.error("Llena los campos necesarios");
+                        } else {
+                            this.save();
+                        } form.classList.add("was-validated");
+                    }, false)
+            });
+        })();
 
         this.findOwner = () => {
             if ($routeParams.id) {

@@ -1,7 +1,9 @@
+<div ng-init="redirectHandler2('ROLE_RECEPCIONISTA')"></div>
 <div ng-init="ctrlPetList.init()"></div>
 <div class="container">
   <div class="row">
-    <h2 style="padding-top: 30px; text-align: center;" class="col-md-10">Mascotas de {{owner.name}} {{owner.lastname}} {{owner.surname}}</h2>
+    <h2 style="padding-top: 30px; text-align: center;" class="col-md-10">Mascotas de {{owner.name}} {{owner.lastname}}
+      {{owner.surname}}</h2>
     <button class="btn btn-info col-md-2" style="margin: 30px 0px; width: 10%" data-bs-toggle="modal"
       data-bs-target="#exampleModal">Registrar</button>
   </div>
@@ -25,7 +27,8 @@
         <td scope="col">{{pet.color}}</td>
         <td scope="col">
           <button class="btn btn-secondary">Detalles</button>
-          <a class="btn btn-primary" href="http://localhost:8080/#!/receptionist/client/pets/schedule/{{pet.id}}">Citas</a>
+          <a class="btn btn-primary"
+            href="http://localhost:8080/#!/receptionist/client/pets/schedule/{{pet.id}}">Citas</a>
         </td>
       </tr>
     </tbody>
@@ -38,45 +41,51 @@
         <h5 class="modal-title" id="exampleModalLabel">Registrar Mascota</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-6">
-            <label for="name">Nombre</label>
-            <input type="text" name="name" id="name" required placeholder="Nombre" class="form-control" ng-model="pet.name">
-          </div>
-          <div class="col-6">
-            <label for="bDate">Fecha de Nacimiento</label>
-            <input type="date" name="bDate" id="bDate" required class="form-control" ng-model="pet.birthDate">
-          </div>
-          <div class="col-6 mt-2">
-            <label for="animalType">Tipo de Animal</label>
-            <select name="animalType" id="animalType" required class="form-select select2" ng-model="pet.animalType"
-              ng-options="type as type.name for type in animalTypeList track by type.id">
-              <option value=""></option>
-            </select>
-          </div>
-          <div class="col-6 mt-2">
-            <label for="breed">Raza</label>
-            <input type="text" name="breed" id="breed" required placeholder="Raza" class="form-control" ng-model="pet.breed">
-          </div>
-          <div class="col-6 mt-2">
-            <label for="color">Color</label>
-            <input type="text" name="color" id="color" required placeholder="Color" class="form-control" ng-model="pet.color">
-          </div>
-          <div class="col-6 mt-2">
-            <label for="gender">Sexo</label>
-            <select name="gender" id="gender" required class="form-select select2" ng-model="pet.gender">
-              <option value=""></option>
-              <option value="1">Macho</option>
-              <option value="0">Hembra</option>
-            </select>
+      <form class="needs-validation" novalidate>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-6">
+              <label for="name">Nombre</label>
+              <input type="text" name="name" id="name" required placeholder="Nombre" class="form-control"
+                ng-model="pet.name">
+            </div>
+            <div class="col-6">
+              <label for="bDate">Fecha de Nacimiento</label>
+              <input type="date" name="bDate" id="bDate" required class="form-control" ng-model="pet.birthDate">
+            </div>
+            <div class="col-6 mt-2">
+              <label for="animalType">Tipo de Animal</label>
+              <select name="animalType" id="animalType" required class="form-select select2 custom-select"
+                ng-model="pet.animalType" ng-options="type as type.name for type in animalTypeList track by type.id">
+                <option value=""></option>
+              </select>
+            </div>
+            <div class="col-6 mt-2">
+              <label for="breed">Raza</label>
+              <input type="text" name="breed" id="breed" required placeholder="Raza" class="form-control"
+                ng-model="pet.breed">
+            </div>
+            <div class="col-6 mt-2">
+              <label for="color">Color</label>
+              <input type="text" name="color" id="color" required placeholder="Color" class="form-control"
+                ng-model="pet.color">
+            </div>
+            <div class="col-6 mt-2">
+              <label for="gender">Sexo</label>
+              <select name="gender" id="gender" required class="form-select select2 custom-select"
+                ng-model="pet.gender">
+                <option value=""></option>
+                <option value="1">Macho</option>
+                <option value="0">Hembra</option>
+              </select>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" ng-click="ctrlPetList.save()">Registrar</button>
-      </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Registrar</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

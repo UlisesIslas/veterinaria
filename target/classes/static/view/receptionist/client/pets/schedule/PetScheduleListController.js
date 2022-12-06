@@ -20,13 +20,8 @@ angular.module("routingApp").controller("PetScheduleListCtrl", [
         $scope.pet = {};
 
         this.init = () => {
-            if (localStorage.getItem("token")) {
-                if (localStorage.getItem("role") == "ROLE_RECEPCIONISTA") {
-                    this.findPet();
-                    this.findScheduleList();
-                }
-            }
-            $window.location.href = "/#!/login";
+            this.findPet();
+            this.findScheduleList();
         }
 
         this.findPet = () => {
@@ -44,6 +39,24 @@ angular.module("routingApp").controller("PetScheduleListCtrl", [
                 })
             }
         }
+
+        (() => {
+            "use strict";
+            const forms = document.querySelectorAll(".needs-validation");
+            Array.prototype.slice.call(forms).forEach((form) => {
+                form.addEventListener(
+                    "submit",
+                    (event) => {
+                        if(!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            notyf.error("Llena los campos necesarios");
+                        } else {
+                            this.update();
+                        }form.classList.add("was-validated");
+                    }, false)
+            });
+        })();
 
         this.findScheduleList = () => {
             if ($routeParams.id) {
