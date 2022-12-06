@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html ng-app="routingApp">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Veterinaria</title>
     <script src="./js/jquery.min.js"></script>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/navbar.css">
     <link rel="stylesheet" href="css/select2.min.css" />
     <link rel="stylesheet" href="./css/notyf.min.css">
     <link rel="stylesheet" href="./css/app.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.15/sweetalert2.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.15/sweetalert2.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.15/sweetalert2.all.min.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -38,26 +41,35 @@
     <link rel="stylesheet" href="./css/style-with-prefix.css">
     <link href="https://fonts.googleapis.com/css2?family=Muli:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body ng-app="routingApp" ng-controller="LoginCtrl">
     <div ng-init="initial()"></div>
-    <nav class="py-2 bg-light border-bottom">
-        <div class="container flex-wrap d-flex">
+
+    <nav class="html-container">
+        <div class="html-section">
             <ul class="nav me-auto">
-                <li class="nav-item">
-                    <a href="{{role === 'ROLE_ADMINISTRADOR' ? '/#!/admin/user' : role === 'ROLE_RECEPCIONISTA' ? '/#!/receptionist' : role === 'ROLE_DOCTOR' || role === 'ROLE_ESTILISTA' ? '/#!/my-schedules' : '#!/login'}}" class="px-2 nav-link link-dark active" aria-current="page"><i class="fa fa-home"></i> Inicio</a>
+                <li class="nav-item ">
+                    <a href="{{role === 'ROLE_ADMINISTRADOR' ? '/#!/admin/user' : role === 'ROLE_RECEPCIONISTA' ? '/#!/receptionist' : role === 'ROLE_DOCTOR' || role === 'ROLE_ESTILISTA' ? '/#!/my-schedules' : '#!/login'}}"
+                        class="px-2 nav-link link-dark active" aria-current="page"><i class="fa fa-home"></i> Inicio</a>
                 </li>
                 <li class="nav-item" ng-if="role === 'ROLE_RECEPCIONISTA'">
-                    <a href="/#!/receptionist/client" class="px-2 nav-link link-dark active" aria-current="page"><i class="fa fa-user"></i> Clientes</a>
+                    <a href="/#!/receptionist/client" class="px-2 nav-link link-dark active" aria-current="page"><i
+                            class="fa fa-user"></i> Clientes</a>
                 </li>
                 <li class="nav-item" ng-if="role === 'ROLE_RECEPCIONISTA'">
-                    <a href="/#!/receptionist/schedule" class="px-2 nav-link link-dark active" aria-current="page"><i class="fa fa-book"></i> Citas</a>
+                    <a href="/#!/receptionist/schedule" class="px-2 nav-link link-dark active" aria-current="page"><i
+                            class="fa fa-book"></i> Citas</a>
                 </li>
                 <li class="nav-item" ng-click="logout()" ng-if="currentSession">
                     <a class="px-2 nav-link link-dark"><i class="fa fa-sign-out-alt"></i> Cerrar Sesión</a>
                 </li>
+
             </ul>
         </div>
     </nav>
+
+
+
     <div class="mt-5 row">
         <div ng-view></div>
     </div>
@@ -75,4 +87,5 @@
     <script src="./view/receptionist/schedule/ScheduleRegisterController.js"></script>
     <script src="./view/doctor/DrScheduleListController.js"></script>
 </body>
+
 </html>

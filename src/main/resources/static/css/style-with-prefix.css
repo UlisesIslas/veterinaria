@@ -8,9 +8,9 @@
 body {
   margin: 0;
   padding: 0;
- /* background-color: #481c9f;
-  background-image: url("../images/cover.png");*/
-  background: -webkit-linear-gradient(75deg, #003399, rgb(102, 207, 255));
+ background: #003399;
+  background-image: url("../images/paw3.jpg");
+ /* background: -webkit-linear-gradient(75deg, #003399, rgb(102, 207, 255));*/
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -26,6 +26,7 @@ button {
     "Helvetica Neue", Helvetica, sans-serif;
   outline: none;
 }
+
 
 .main-container {
   max-width: 900px;
@@ -50,7 +51,7 @@ a:hover {
 .form-body {
   background-image: url("../images/cover.png");
   background-color: #003399;
-  /*background: -webkit-linear-gradient(75deg, #003399, rgb(102, 207, 255));*/
+  background: -webkit-linear-gradient(75deg, #003399, rgb(102, 207, 255));
   overflow: hidden;
   padding: 50px;
   color: #ffffff;
