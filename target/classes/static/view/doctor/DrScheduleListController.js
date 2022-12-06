@@ -56,5 +56,39 @@ angular.module("routingApp").controller("DrScheduleListCtrl", [
                 },
             });
         }
+
+        this.scheduleDone = (obj) => {
+            Swal.fire({
+                title: "¿Estás seguro?",
+                text: "Se marcará esta cita como completado",
+                icon: "info",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: "Completar",
+                cancelButtonText: "Cancelar",
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    obj.status = 3;
+                    return $http({
+                        method: "POST",
+                        url: `${APP_URL.url}/schedule/save`,
+                        headers: {
+                            "Content-Type": "application/json",
+                            Accept: "application/json",
+                            authorization: $scope.token,
+                        },
+                        data: obj,
+                    }).then((response) => {
+                        if (response.data) {
+                            notyf.success("Cita completada");
+                            this.findScheduleList2();
+                        } else {
+                            notyf.error("Ocurrió un error");
+                        }
+                    })
+                }
+            })
+        }
     }
 ])
