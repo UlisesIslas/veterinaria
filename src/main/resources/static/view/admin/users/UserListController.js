@@ -21,6 +21,7 @@ angular.module("routingApp").controller("UserListCtrl", [
         this.getUsers = () => {
             if (localStorage.getItem("token")) {
                 if (localStorage.getItem("role") == "ROLE_ADMINISTRADOR") {
+                    $scope.showNav = true;
                     return $http({
                         method: "GET",
                         url: `${APP_URL.url}/users`,
@@ -39,6 +40,7 @@ angular.module("routingApp").controller("UserListCtrl", [
                     });
                 }
             }
+            $scope.showNav = false;
             $window.location.href = "/#!/login"
         }
 

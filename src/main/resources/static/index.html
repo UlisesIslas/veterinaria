@@ -30,8 +30,28 @@
     <script src="./js/angular-locale_es-es.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script src="js/select2.min.js"></script>
+    <script src="https://kit.fontawesome.com/1ba0cdec7d.js" crossorigin="anonymous"></script>
+
+
+
+
+    <link rel="stylesheet" href="./css/style-with-prefix.css">
+    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body ng-app="routingApp">
+<body ng-app="routingApp" ng-controller="LoginCtrl">
+    <div ng-init="initial()"></div>
+    <nav class="py-2 bg-light border-bottom">
+        <div class="container flex-wrap d-flex">
+            <ul class="nav me-auto">
+                <li class="nav-item">
+                    <a href="{{role === 'ROLE_ADMINISTRADOR' ? '/#!/admin/user' : role === 'ROLE_RECEPCIONISTA' ? '/#!/receptionist' : role === 'ROLE_DOCTOR' || role === 'ROLE_ESTILISTA' ? '/#!/my-schedules' : '#!/login'}}" class="px-2 nav-link link-dark active" aria-current="page"><i class="fa fa-home"></i> Inicio</a>
+                </li>
+                <li class="nav-item" ng-click="logout()" ng-if="currentSession">
+                    <a class="px-2 nav-link link-dark"><i class="fa fa-sign-out-alt"></i> Cerrar Sesión</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="mt-5 row">
         <div ng-view></div>
     </div>

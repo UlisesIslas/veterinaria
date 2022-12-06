@@ -42,7 +42,11 @@ angular.module("routingApp").controller("LoginCtrl", [
                     $window.location.href = "/#!/receptionist";
                 } else if (localStorage.getItem("role") == "ROLE_DOCTOR" || localStorage.getItem("role") == "ROLE_ESTILISTA") {
                     $window.location.href = "/#!/my-schedules";
+                } else {
+                    $window.location.href = "/#!/login";
                 }
+            } else {
+                $window.location.href = "/#!/login";
             }
         }
 
@@ -77,7 +81,7 @@ angular.module("routingApp").controller("LoginCtrl", [
         $scope.logout = () => {
             $rootScope.currentSession = false;
             $window.localStorage.clear();
-            $window.location.href = "#!/";
+            $window.location.href = "#!/login";
             $scope.initial;
         }
 
@@ -130,7 +134,7 @@ angular.module("routingApp").controller("LoginCtrl", [
                         $window.location.href = "/#!/my-schedules";
                     }
                 } else {
-                    notyf.error("Usuario y/o Contraseña Incorrecto")
+                    notyf.error("Usuario y/o Contraseña Incorrecto");
                 }
             }).catch((err) => {
                 console.log(err);
