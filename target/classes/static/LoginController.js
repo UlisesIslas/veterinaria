@@ -34,7 +34,7 @@ angular.module("routingApp").controller("LoginCtrl", [
             }
         }
 
-        this.redirectHandler = () => {
+        $scope.redirectHandler = () => {
             if (localStorage.getItem("token")) {
                 if (localStorage.getItem ("role") == "ROLE_ADMINISTRADOR") {
                     $window.location.href = "/#!/admin/user"
