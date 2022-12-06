@@ -18,8 +18,13 @@ angular.module("routingApp").controller("ScheduleRegisterCtrl", [
         });
 
         this.init = () => {
-            this.findVisitReasons();
-            this.findOwners();
+            if (localStorage.getItem("token")) {
+                if (localStorage.getItem("role") == "ROLE_RECEPCIONISTA") {
+                    this.findVisitReasons();
+                    this.findOwners();
+                }
+            }
+            $window.location.href = "/#!/login";
         }
 
         this.findOwners = () => {

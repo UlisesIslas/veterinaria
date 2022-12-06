@@ -18,10 +18,15 @@ angular.module("routingApp").controller("ClientRegisterCtrl", [
         });
 
         this.init = () => {
-            this.getStates();
-            this.getSuburbTypes();
-            this.getStreetTypes();
-            this.getAnimalTypes();
+            if (localStorage.getItem("token")) {
+                if (localStorage.getItem("role") == "ROLE_RECEPCIONISTA") {
+                    this.getStates();
+                    this.getSuburbTypes();
+                    this.getStreetTypes();
+                    this.getAnimalTypes();
+                }
+            }
+            $window.location.href = "/#!/login";
         }
 
         this.getCities = () => {

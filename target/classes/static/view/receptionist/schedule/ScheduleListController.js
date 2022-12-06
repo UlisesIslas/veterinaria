@@ -6,7 +6,8 @@ angular.module("routingApp").controller("ScheduleListCtrl", [
     "$location",
     "$routeParams",
     "$filter",
-    function ($rootScope, $scope, $http, APP_URL, $location, $routeParams, $filter) {
+    "$window",
+    function ($rootScope, $scope, $http, APP_URL, $location, $routeParams, $filter, $window) {
         $scope.token = `Bearer ${localStorage.getItem("token")}`;
         const notyf = new Notyf({
             duration: 2500,
@@ -17,7 +18,12 @@ angular.module("routingApp").controller("ScheduleListCtrl", [
         });
 
         this.init = () => {
-            this.findScheduleList();
+            if (localStorage.getItem("token")) {
+                if (localStorage.getItem("role") == "ROLE_RECEPCIONISTA") {
+                    this.findScheduleList();
+                }
+            }
+            $window.location.href = "/#!/login";
         }
 
         this.findScheduleList = () => {

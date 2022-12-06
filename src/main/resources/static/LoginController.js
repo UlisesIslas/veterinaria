@@ -16,8 +16,6 @@ angular.module("routingApp").controller("LoginCtrl", [
         });
 
         $rootScope.utils = {
-            img: null,
-            id: null,
             role: null,
         };
 
@@ -25,8 +23,6 @@ angular.module("routingApp").controller("LoginCtrl", [
             if (localStorage.getItem("token")) {
                 $rootScope.currentSession = true;
                 $rootScope.role = localStorage.getItem("role");
-                $rootScope.utils.img = $scope.decodeToken(localStorage.getItem("token")).image;
-                $rootScope.utils.id = $scope.decodeToken(localStorage.getItem("token")).id;
                 $rootScope.utils.role = $scope.decodeToken(localStorage.getItem("token")).role;
             } else {
                 $rootScope.currentSession = false;
@@ -35,6 +31,18 @@ angular.module("routingApp").controller("LoginCtrl", [
                     id: null,
                     role: null
                 };
+            }
+        }
+
+        this.redirectHandler = () => {
+            if (localStorage.getItem("token")) {
+                if (localStorage.getItem ("role") == "ROLE_ADMINISTRADOR") {
+                    $window.location.href = "/#!/admin/user"
+                } else if (localStorage.getItem("role") == "ROLE_RECEPCIONISTA") {
+                    $window.location.href = "/#!/receptionist";
+                } else if (localStorage.getItem("role") == "ROLE_DOCTOR" || localStorage.getItem("role") == "ROLE_ESTILISTA") {
+                    $window.location.href = "/#!/my-schedules";
+                }
             }
         }
 
@@ -114,7 +122,13 @@ angular.module("routingApp").controller("LoginCtrl", [
                     $rootScope.currentSession = $scope.getToken();
                     notyf.success("¡Bienvenido/a!");
                     $scope.initial();
-                    // agregar if para redirección según el rol
+                    if (name.role == "ROLE_ADMINISTRADOR") {
+                        $window.location.href = "/#!/admin/user";
+                    } else if (name.role == "ROLE_RECEPCIONISTA") {
+                        $window.location.href = "/#!/receptionist";
+                    } else {
+                        $window.location.href = "/#!/my-schedules";
+                    }
                 } else {
                     notyf.error("Usuario y/o Contraseña Incorrecto")
                 }

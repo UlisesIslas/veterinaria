@@ -33,16 +33,21 @@ angular.module("routingApp").controller("UserRegisterCtrl", [
         };
 
         this.getRoles = () => {
-            return $http({
-                method: "GET",
-                url: `${APP_URL.url}/users/roles`,
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                },
-            }).then((res) => {
-                $scope.listRoles = res.data;
-            })
+            if (localStorage.getItem("token")) {
+                if (localStorage.getItem("role") == "ROLE_ADMINISTRADOR") {
+                    return $http({
+                        method: "GET",
+                        url: `${APP_URL.url}/users/roles`,
+                        headers: {
+                            "Content-Type": "application/json",
+                            Accept: "application/json",
+                        },
+                    }).then((res) => {
+                        $scope.listRoles = res.data;
+                    })
+                }
+            }
+            $window.location.href = "/#!/login";
         }
 
         this.save = () => {

@@ -8,7 +8,7 @@ angular.module("routingApp").controller("PetListCtrl", [
     "$filter",
     "$window",
     function ($rootScope, $scope, $http, APP_URL, $location, $routeParams, $filter) {
-        $scope.token =  `Bearer ${localStorage.getItem("token")}`;
+        $scope.token = `Bearer ${localStorage.getItem("token")}`;
         const notyf = new Notyf({
             duration: 2500,
             position: {
@@ -20,9 +20,14 @@ angular.module("routingApp").controller("PetListCtrl", [
         $scope.owner = {};
 
         this.init = () => {
-            this.findOwner();
-            this.findOwnerPets();
-            this.getAnimalTypes();
+            if (localStorage.getItem("token")) {
+                if (localStorage.getItem("role") == "ROLE_RECEPCIONISTA") {
+                    this.findOwner();
+                    this.findOwnerPets();
+                    this.getAnimalTypes();
+                }
+            }
+            $window.location.href = "/#!/login";
         }
 
         this.findOwner = () => {
