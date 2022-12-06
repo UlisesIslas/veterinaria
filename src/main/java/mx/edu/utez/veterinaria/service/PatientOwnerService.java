@@ -11,6 +11,7 @@ import mx.edu.utez.veterinaria.entity.PatientOwner;
 import mx.edu.utez.veterinaria.entity.Patients;
 import mx.edu.utez.veterinaria.entity.Wallet;
 import mx.edu.utez.veterinaria.entity.dto.OwnerDTO;
+import mx.edu.utez.veterinaria.entity.dto.OwnerDetailsDTO;
 import mx.edu.utez.veterinaria.repository.IOwnerAddressRepository;
 import mx.edu.utez.veterinaria.repository.IPatientOwnerRepository;
 import mx.edu.utez.veterinaria.repository.IPatientsRepository;
@@ -38,10 +39,14 @@ public class PatientOwnerService {
         return patientOwnerRepository.findById(id).get();
     }
 
-    /* @Transactional
-    public boolean save(PatientOwner obj) {
-        return patientOwnerRepository.save(obj) != null;
-    } */
+    @Transactional(readOnly = true)
+    public OwnerDetailsDTO findDetails(int ownerId) {
+        OwnerDetailsDTO details = new OwnerDetailsDTO();
+        details.setOwner(findById(ownerId));
+        details.setAddress(ownerAddressRepository.findByOwnerId(ownerId));
+        details.setWallet(walletRepository.findByOwnerId(ownerId));
+        return details;
+    }
 
     @Transactional
     public boolean save(OwnerDTO obj) {

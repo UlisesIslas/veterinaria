@@ -43,6 +43,10 @@ angular.module("routingApp").controller("PetListCtrl", [
             });
         })();
 
+        this.setModalObj = (obj) => {
+            $scope.modalObj = obj;
+        }
+
         this.findOwner = () => {
             if ($routeParams.id) {
                 return $http({

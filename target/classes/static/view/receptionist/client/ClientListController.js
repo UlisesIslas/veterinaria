@@ -17,6 +17,20 @@ angular.module("routingApp").controller("ClientListCtrl", [
             },
         });
 
+        this.findDetails = (id) => {
+            return $http({
+                method: "GET",
+                url: `${APP_URL.url}/owner/details/${id}`,
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    authorization: $scope.token,
+                },
+            }).then((res) => {
+                $scope.modalObj = res.data;
+            })
+        }
+
         this.findOwners = () => {
             return $http({
                 method: "GET",

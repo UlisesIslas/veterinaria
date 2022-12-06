@@ -26,7 +26,8 @@
         <td scope="col">{{pet.breed}}</td>
         <td scope="col">{{pet.color}}</td>
         <td scope="col">
-          <button class="btn btn-secondary">Detalles</button>
+          <button class="btn btn-secondary" data-bs-toggle="modal"
+          data-bs-target="#detailModal" ng-click="ctrlPetList.setModalObj(pet)">Detalles</button>
           <a class="btn btn-primary"
             href="http://localhost:8080/#!/receptionist/client/pets/schedule/{{pet.id}}">Citas</a>
         </td>
@@ -34,6 +35,59 @@
     </tbody>
   </table>
 </div>
+
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailModalLabel"><b>Detalles de {{modalObj.name}}</b></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-4">
+            <span><b>Tipo de Animal:</b> {{modalObj.animalType.name}}</span>
+          </div>
+          <div class="col-4">
+            <span><b>Raza:</b> {{modalObj.breed}}</span>
+          </div>
+          <div class="col-4">
+            <span><b>F. Nacimiento:</b> {{modalObj.birthDate | date: 'dd/MMM/yyyy'}}</span>
+          </div>
+          <div class="col-6 mt-3">
+            <span><b>Color:</b> {{modalObj.color}}</span>
+          </div>
+          <div class="col-6 mt-3">
+            <span><b>Sexo:</b> {{modalObj.gender == 0 ? 'Hembra' : 'Macho'}}</span>
+          </div>
+          <hr class="mt-3">
+          <div class="col-12">
+            <h5><b>Datos del Propietario</b></h5>
+          </div>
+          <div class="col-12">
+            <span><b>Nombre:</b> {{modalObj.owner.name}} {{modalObj.owner.lastname}} {{modalObj.owner.surname}}</span>
+          </div>
+          <div class="col-12 mt-3">
+            <span><b>Correo Electrónico:</b> {{modalObj.owner.email}}</span>
+          </div>
+          <div class="col-4 mt-3">
+            <span><b>Teléfono:</b> {{modalObj.owner.phone}}</span>
+          </div>
+          <div class="col-4 mt-3">
+            <span><b>Teléfono Celular:</b> {{modalObj.owner.mobile}}</span>
+          </div>
+          <div class="col-4 mt-3">
+            <span><b>WhatsApp:</b> {{modalObj.owner.whatsapp}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">

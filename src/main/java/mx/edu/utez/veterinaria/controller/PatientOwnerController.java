@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import mx.edu.utez.veterinaria.entity.PatientOwner;
 import mx.edu.utez.veterinaria.entity.dto.OwnerDTO;
+import mx.edu.utez.veterinaria.entity.dto.OwnerDetailsDTO;
 import mx.edu.utez.veterinaria.service.PatientOwnerService;
 
 @RestController
@@ -30,6 +31,11 @@ public class PatientOwnerController {
     @GetMapping("/{id}")
     public PatientOwner findById(@PathVariable("id") int id) {
         return patientOwnerService.findById(id);
+    }
+
+    @GetMapping("/details/{id}")
+    public OwnerDetailsDTO findOwnerDetails(@PathVariable("id") int id) {
+        return patientOwnerService.findDetails(id);
     }
 
     @PostMapping("/save")

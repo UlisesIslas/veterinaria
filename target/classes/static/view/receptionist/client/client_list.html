@@ -3,7 +3,8 @@
 <div class="container">
     <div class="row">
         <h2 style="padding-top: 30px; text-align: center;" class="col-md-10">Clientes</h2>
-        <a class="btn btn-info col-md-2" style="margin: 30px 0px; width: 10%" href="http://localhost:8080/#!/receptionist/client/register">Registrar</a>
+        <a class="btn btn-info col-md-2" style="margin: 30px 0px; width: 10%"
+            href="http://localhost:8080/#!/receptionist/client/register">Registrar</a>
     </div>
     <table class="table" id="clients">
         <thead>
@@ -22,10 +23,83 @@
                 <td scope="col">{{client.email}}</td>
                 <td scope="col">{{client.phone}}</td>
                 <td scope="col">
-                    <button class="btn btn-secondary">Detalles</button>
-                    <a class="btn btn-primary" href="http://localhost:8080/#!/receptionist/client/pets/{{client.id}}">Mascotas</a>
+                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        ng-click="ctrlClientList.findDetails(client.id)">Detalles</button>
+                    <a class="btn btn-primary"
+                        href="http://localhost:8080/#!/receptionist/client/pets/{{client.id}}">Mascotas</a>
                 </td>
             </tr>
         </tbody>
     </table>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detalles de {{modalObj.owner.name}}
+                    {{modalObj.owner.lastname}} {{modalObj.owner.surname}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <span><b>Correo Electrónico:</b> {{modalObj.owner.email}}</span>
+                    </div>
+                    <div class="col-4 mt-3">
+                        <span><b>Teléfono:</b> {{modalObj.owner.phone}}</span>
+                    </div>
+                    <div class="col-4 mt-3">
+                        <span><b>Teléfono Celular:</b> {{modalObj.owner.mobile}}</span>
+                    </div>
+                    <div class="col-4 mt-3">
+                        <span><b>WhatsApp:</b> {{modalObj.owner.whatsapp}}</span>
+                    </div>
+                    <hr class="mt-3">
+                    <div class="col-12">
+                        <h5>Dirección</h5>
+                    </div>
+                    <div class="col-6">
+                        <span><b>Municipio:</b> {{modalObj.address.city.name}}</span>
+                    </div>
+                    <div class="col-6">
+                        <span><b>Estado:</b> {{modalObj.address.city.state.name}}</span>
+                    </div>
+                    <div class="col-6 mt-3">
+                        <span><b>Tipo de Vialidad:</b> {{modalObj.address.streetType.name}}</span>
+                    </div>
+                    <div class="col-6 mt-3">
+                        <span><b>Nombre de la Vialidad:</b> {{modalObj.address.streetName}}</span>
+                    </div>
+                    <div class="col-6 mt-3">
+                        <span><b>Tipo de Asentamiento:</b> {{modalObj.address.suburbType.name}}</span>
+                    </div>
+                    <div class="col-6 mt-3">
+                        <span><b>Nombre del Asentamiento:</b> {{modalObj.address.suburbName}}</span>
+                    </div>
+                    <div class="col-4 mt-3">
+                        <span><b>Número Exterior:</b> {{modalObj.address.outdoorNumber}}</span>
+                    </div>
+                    <div class="col-4 mt-3">
+                        <span><b>Número Interior:</b> {{modalObj.address.interiorNumber}}</span>
+                    </div>
+                    <div class="col-4 mt-3">
+                        <span><b>Código Postal:</b> {{modalObj.address.postalCode}}</span>
+                    </div>
+                    <hr class="mt-3">
+                    <div class="col-12">
+                        <h5>Monedero Electrónico</h5>
+                    </div>
+                    <div class="col-6">
+                        <span><b>Número:</b> {{modalObj.wallet.number}}</span>
+                    </div>
+                    <div class="col-6">
+                        <span><b>Saldo:</b> {{modalObj.wallet.balance}} puntos</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
 </div>
